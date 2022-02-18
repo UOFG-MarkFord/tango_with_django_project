@@ -32,7 +32,8 @@ class PageForm(forms.ModelForm):
         # we can either exclude the category field from the form,
         exclude = ('category',)
         # or specify the fields to include (don't include the category field).
-        #fields = ('title', 'url', 'views')
+        #fields = ('title', 'url', 'views')
+
 
     def clean(self):
         cleaned_data = self.cleaned_data
@@ -44,4 +45,5 @@ class PageForm(forms.ModelForm):
             url = f'http://{url}'
             cleaned_data['url'] = url
             
-        return cleaned_data
+        return cleaned_data
+
