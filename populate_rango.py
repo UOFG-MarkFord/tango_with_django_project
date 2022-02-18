@@ -3,6 +3,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE',
 'tango_with_django_project.settings')
 
 import django
+import random
 django.setup()
 from rango.models import Category, Page
 
@@ -19,7 +20,8 @@ def populate():
     {'title':'How to Think like a Computer Scientist',
     'url':'http://www.greenteapress.com/thinkpython/'},
     {'title':'Learn Python in 10 Minutes',
-    'url':'http://www.korokithakis.net/tutorials/python/'} ]
+    'url':'http://www.korokithakis.net/tutorials/python/'} ]
+
 
     django_pages = [
     {'title':'Official Django Tutorial',
@@ -39,9 +41,7 @@ def populate():
     'Django': {'pages': django_pages,'views':64,'likes':32},
     'Other Frameworks': {'pages': other_pages,'views':32,'likes':16} }
 
-    #,'views':128,'likes':64
-    #,'views':64,'likes':32
-    #,'views':32,'likes':16
+
     # If you want to add more categories or pages,
     # add them to the dictionaries above.
 
@@ -60,7 +60,7 @@ def populate():
 def add_page(cat, title, url, views=0):
     p = Page.objects.get_or_create(category=cat, title=title)[0]
     p.url=url
-    p.views=views
+    p.views= random.randint(1, 100)
     p.save()
     return p
 
@@ -69,9 +69,11 @@ def add_cat(name, views=0, likes = 0):
     c.views=views
     c.likes=likes
     c.save()
-    return c
+    return c
+
 
 # Start execution here!
 if __name__ == '__main__':
     print('Starting Rango population script...')
-    populate()
+    populate()
+
